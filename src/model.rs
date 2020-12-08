@@ -2,13 +2,14 @@
 
 use ultraviolet::{Lerp, Mat2, Vec2};
 
-struct Model {
+#[derive(Clone, Debug)]
+pub struct Model {
     verts: Vec<Vec2>,
     edges: Vec<(usize, usize)>,
 }
 
 impl Model {
-    fn new(verts: Vec<Vec2>, edges: Vec<(usize, usize)>) -> Self {
+    pub fn new(verts: Vec<Vec2>, edges: Vec<(usize, usize)>) -> Self {
         Self { verts, edges }
     }
 
@@ -27,7 +28,7 @@ impl Model {
         self
     }
 
-    pub fn faces(&self) -> Vec<(Vec2, Vec2)> {
+    pub fn edges(&self) -> Vec<(Vec2, Vec2)> {
         self.edges
             .iter()
             .map(|(a, b)| (self.verts[*a], self.verts[*b]))
